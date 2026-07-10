@@ -16,3 +16,9 @@
 -- Whenever you're making an API call using axios, pass {withCredentials : true}. It will not send the token back to the Application tab of browser. Cookies won't have the token. Set-cookies will be seen in Networks tab Header but not in Applications tab.
 -- Send the user data in backend, instaed of "Login Successful" message.
 -- Test your code. Login successful saves token under Applications tab.
+-- Install redux-toolkit and react-redux
+-- Configure store => Provider => createSlice => add reducer to store
+-- Add Redux devtools in chrome
+-- Login and see if your data is showing properly in the store
+-- Navbar should update as soon as user logs in
+-- Refactor your code to add constants file
