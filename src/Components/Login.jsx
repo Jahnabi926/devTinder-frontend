@@ -27,10 +27,15 @@ const Login = () => {
       dispatch(addUser(res.data?.data));
       navigate("/");
     } catch (error) {
-      if (error.request) {
+      if (error.response) {
+        // server responded with an oror (e.g. wrong credentials)
+        setError(error.response.data || "Invalid email or password.");
+      } else if (error.request) {
+        // request sent, no response came back
         setError("Network error — please check your connection.");
+      } else {
+        setError("Something went wrong. Please try again.");
       }
-      setError("Something went wrong. Please try again.");
     }
   };
   return (
