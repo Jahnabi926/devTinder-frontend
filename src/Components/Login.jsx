@@ -4,10 +4,13 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router";
+import ErrorToast from "./ErrorToast";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("jahnabi@gmail.com");
   const [password, setPassword] = useState("Jahnabi@1010");
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,15 +24,18 @@ const Login = () => {
         },
         { withCredentials: true },
       );
-      console.log("User logged in:", res.data);
-      dispatch(addUser(res.data));
+      dispatch(addUser(res.data?.data));
       navigate("/");
     } catch (error) {
-      console.log("Login failed - ERROR : ", error.message);
+      if (error.request) {
+        setError("Network error — please check your connection.");
+      }
+      setError("Something went wrong. Please try again.");
     }
   };
   return (
     <div className="flex justify-center my-10">
+      <ErrorToast error={error} />
       <div className="card bg-base-300 w-96 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         <div className="card-body">
           <h2 className="card-title justify-center">Login</h2>
@@ -43,7 +49,6 @@ const Login = () => {
               className="input"
               value={emailId}
               onChange={(e) => {
-                console.log("Email typed:", e.target.value);
                 setEmailId(e.target.value);
               }}
             />
@@ -58,7 +63,6 @@ const Login = () => {
               className="input"
               value={password}
               onChange={(e) => {
-                console.log("Password typed:", e.target.value);
                 setPassword(e.target.value);
               }}
             />
