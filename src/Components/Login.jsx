@@ -7,8 +7,8 @@ import { useNavigate } from "react-router";
 import ErrorToast from "./ErrorToast";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("jahnabi@gmail.com");
-  const [password, setPassword] = useState("Jahnabi@1010");
+  const [emailId, setEmailId] = useState("rajKumar@gmail.com");
+  const [password, setPassword] = useState("Raj@1010");
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
