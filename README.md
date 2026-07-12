@@ -27,3 +27,4 @@
 -- Logout
 -- Get the feed and add the feed to the store
 -- Build the user card on feed.
+-- Build Edit Profile page
