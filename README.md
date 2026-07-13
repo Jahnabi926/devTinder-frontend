@@ -32,7 +32,5 @@
 -- See all my requests / Requests page
 -- Accept/ Reject connection requests
 -- Send /ignore the user card from feed
-
-Remaining -
 -- Sign up New User
 -- E2E Testing

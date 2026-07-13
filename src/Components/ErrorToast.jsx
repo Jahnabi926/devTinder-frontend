@@ -1,5 +1,20 @@
+import { useEffect, useState } from "react";
+
 const ErrorToast = ({ error }) => {
-  if (!error) return null;
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!error) return;
+
+    setVisible(true);
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [error]);
+
+  if (!visible) return null;
 
   return (
     <div className="toast toast-top toast-center z-50">
