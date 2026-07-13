@@ -1,18 +1,26 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
+import ErrorToast from "./ErrorToast";
 
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connection);
+  const [error, setError] = useState("");
 
   const fetchConnections = async () => {
-    const res = await axios.get(BASE_URL + "/user/connections", {
-      withCredentials: true,
-    });
-    dispatch(addConnection(res?.data?.data));
+    try {
+      const res = await axios.get(BASE_URL + "/user/connections", {
+        withCredentials: true,
+      });
+      dispatch(addConnection(res?.data?.data));
+    } catch (error) {
+      setError(
+        error?.response?.data || "Something went wrong. Please try again.",
+      );
+    }
   };
 
   useEffect(() => {
@@ -28,14 +36,16 @@ const Connections = () => {
 
   return (
     <div className="flex flex-col justify-center items-center my-10">
+      {error && <ErrorToast error={error} />}
+
       <h1 className="text-white font-bold text-2xl">Connections</h1>
 
       {connections.map((connection) => {
-        const { firstName, lastName, age, gender, photoUrl, about } =
+        const { _id, firstName, lastName, age, gender, photoUrl, about } =
           connection;
         return (
           <div
-            key={connection._id}
+            key={_id}
             className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 items-center"
           >
             <div>
@@ -49,7 +59,7 @@ const Connections = () => {
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>
-              {age && gender && <p>{age + "," + gender}</p>}
+              {age && gender && <p>{age + " , " + gender}</p>}
               <p>{about}</p>
             </div>
           </div>
