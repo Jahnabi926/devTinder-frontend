@@ -31,8 +31,8 @@
 -- See all my connections / Connections page
 -- See all my requests / Requests page
 -- Accept/ Reject connection requests
+-- Send /ignore the user card from feed
 
 Remaining -
--- Send /ignore the user card from feed
 -- Sign up New User
 -- E2E Testing

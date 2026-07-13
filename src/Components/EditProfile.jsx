@@ -6,6 +6,7 @@ import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
 
 const EditProfile = ({ user }) => {
+  const { _id } = user;
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age);
@@ -29,9 +30,9 @@ const EditProfile = ({ user }) => {
       await setTimeout(() => {
         setShowToast(false);
       }, 3000);
-    } catch (error) {
+    } catch (err) {
       setError(
-        error?.response?.data || "Something went wrong. Please try again.",
+        err?.response?.data || "Something went wrong. Please try again.",
       );
     }
   };
@@ -138,7 +139,7 @@ const EditProfile = ({ user }) => {
         </div>
       </div>
       <UserCard
-        user={{ firstName, lastName, age, gender, photoUrl, about }}
+        user={{ _id, firstName, lastName, age, gender, photoUrl, about }}
         showActions={false}
       />
     </div>

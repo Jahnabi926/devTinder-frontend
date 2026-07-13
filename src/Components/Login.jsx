@@ -26,11 +26,11 @@ const Login = () => {
       );
       dispatch(addUser(res.data?.data));
       navigate("/");
-    } catch (error) {
-      if (error.response) {
+    } catch (err) {
+      if (err.response) {
         // server responded with an oror (e.g. wrong credentials)
-        setError(error.response.data || "Invalid email or password.");
-      } else if (error.request) {
+        setError(err.response.data || "Invalid email or password.");
+      } else if (err.request) {
         // request sent, no response came back
         setError("Network error — please check your connection.");
       } else {

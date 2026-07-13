@@ -31,9 +31,9 @@ const Requests = () => {
         { withCredentials: true },
       );
       dispatch(removeRequests(_id));
-    } catch (error) {
+    } catch (err) {
       setError(
-        error?.response?.data || "Something went wrong. Please try again.",
+        err?.response?.data || "Something went wrong. Please try again.",
       );
     }
   };

@@ -18,8 +18,8 @@ const Navbar = () => {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
       navigate("/login");
-    } catch (error) {
-      if (error.request) {
+    } catch (err) {
+      if (err.request) {
         setError("Network error — please check your connection.");
       }
       setError("Something went wrong. Please try again.");

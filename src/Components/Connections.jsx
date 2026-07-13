@@ -16,9 +16,9 @@ const Connections = () => {
         withCredentials: true,
       });
       dispatch(addConnection(res?.data?.data));
-    } catch (error) {
+    } catch (err) {
       setError(
-        error?.response?.data || "Something went wrong. Please try again.",
+        err?.response?.data || "Something went wrong. Please try again.",
       );
     }
   };

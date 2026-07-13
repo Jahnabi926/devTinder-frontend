@@ -20,8 +20,8 @@ const Body = () => {
         withCredentials: true,
       }); // Otherwise the cookie won't be sent and you'll get 401s even when logged in.
       dispatch(addUser(res.data));
-    } catch (error) {
-      if (error.status === 401) {
+    } catch (err) {
+      if (err.status === 401) {
         navigate("/login");
       }
     }
