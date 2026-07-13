@@ -28,3 +28,5 @@
 -- Get the feed and add the feed to the store
 -- Build the user card on feed.
 -- Build Edit Profile page
+-- See all my connections / Connections page
+-- See all my requests / Requests page
