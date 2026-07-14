@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import ErrorToast from "./ErrorToast";
@@ -12,6 +12,7 @@ const Navbar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -25,6 +26,10 @@ const Navbar = () => {
       setError("Something went wrong. Please try again.");
     }
   };
+
+  useEffect(() => {
+    document.activeElement.blur(); // close dropdown whenever the route changes
+  }, [location.pathname]);
 
   return (
     <div className="navbar bg-base-300 shadow-sm">

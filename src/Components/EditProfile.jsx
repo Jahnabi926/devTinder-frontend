@@ -38,8 +38,8 @@ const EditProfile = ({ user }) => {
   };
 
   return (
-    <div className="flex justify-center my-10">
-      <div className="flex justify-center mx-5">
+    <div className="flex flex-col md:flex-row justify-center md:my-10">
+      <div className="flex justify-center my-10 md:mx-5 md:my-0">
         <div className="card bg-base-300 w-96 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
           <div className="card-body">
             <h2 className="card-title justify-center">Edit Profile</h2>

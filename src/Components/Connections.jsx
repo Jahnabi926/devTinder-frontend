@@ -46,7 +46,7 @@ const Connections = () => {
         return (
           <div
             key={_id}
-            className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 items-center"
+            className="flex m-4 p-4 rounded-lg bg-base-300 w-full md:w-1/3 items-center"
           >
             <div>
               <img
