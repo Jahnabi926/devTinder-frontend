@@ -135,4 +135,4 @@ Change http://127.0.0.1:7777/ to http://localhost:7777/ , since our api uses loc
 -- Run the same steps starting from npm run build to deploy our frontend
 -- Run "npm run build" , "sudo scp -r dist/\* /var/www/html/"
 -- Now http://43.204.96.49/login should give the login page, and everything should work !
--- Application deployed successfully on server !
+-- Application deployed successfully on aws machine(server) !
