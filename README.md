@@ -136,3 +136,21 @@ Change http://127.0.0.1:7777/ to http://localhost:7777/ , since our api uses loc
 -- Run "npm run build" , "sudo scp -r dist/\* /var/www/html/"
 -- Now http://43.204.96.49/login should give the login page, and everything should work !
 -- Application deployed successfully on aws machine(server) !
+
+# Adding a Custom Domain Name
+
+-- Go to GoDaddy. Purchase a domain name. Eg- devtinder.in
+-- All / my products -> Edit DNS of your project name
+-- DNS means Domain name server -- it tells Which ip address, devtinder.in is mapping to.
+-- Visit Cloudflare Sign up -- to manage DNS, it gives free SSL. It can be done in GoDaddy as well.
+-- Go to Add a domain name -> devtinder.in -> Quick scan for DNS Records -> free plan -> Continue to activation
+-- Visit GoDaddy -> Nameservers -> Change Nameservers -> I'll use my own nameservers -> use cloudflare nameservers -> copy-paste from cloudflare -> save. Wait for 15 mint to update.
+-- Under DNS Records - delete the A named records of devtinder.in. Keep one.
+-- Under one of the A records ,Copy our public ip4 address from aws and paste it under ip4 address. http not required. Only the ip4 address -> save
+-- devtinder.in will point to our server. Explore !
+
+## Enable SSL - http to https
+
+-- To secure our website -- CloudFlare -> SSL -> Custom SSL/TLS -> Select Flexible -> save
+-- Edge certificates -> Automatic HTTPS Rewrites -> Enable it.
+-- In order to enable full instead of flexible , we need to upload ssl certicate (key) to our server as well and make some nginx configuration. Flexible works for us !
