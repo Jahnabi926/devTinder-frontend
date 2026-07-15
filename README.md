@@ -1,4 +1,4 @@
-# Dev Tinder
+# Dev Tinder Frontend
 
 -- Create a Vite + React app
 -- Remove unnecessary code and craete a hello world app
@@ -34,3 +34,43 @@
 -- Send /ignore the user card from feed
 -- Sign up New User
 -- E2E Testing
+
+## Deployment
+
+-- Signup on AWS
+-- Launch Instance
+-- On terminal change/modify permissions of the pem file in the folder eg-downloads, where you have your pem file using "chmod 400 <secret>.pem
+-- Connect/log in to the machine using ssh that you created , it will be like -- "ssh -i ubuntu@ec2-43..."
+-- The above will log in to the terminal of your machine and move you from Downloads..
+-- Get your softwares to setup your project onto the laptop given by aws by the below--
+
+---install node using "curl -o- "
+-- check your node version in you local computer by doing "node --v"
+-- install that version of node into your machine given by server. Else it will mismatch.
+-- do "nvm install ..."
+-- logout from the machine by "exit"
+-- log back in by "ssh -i ...."
+-- do "nvm install ..." again
+-- node -v to verify
+-- Get your code from github
+-- Grab the code from github of both backend and frontend and clone into the new system
+-- Start deloying the frontend project first.
+-- Do "npm run build" -- vite is the bundler here. It will create a dist folder.
+-- Do ssh to connect again, if its gets disconnected.
+-- Move inside your frontend project, Run "npm install" to install all dependencies along with vite
+-- Now run "npm run build" . It will build our project on aws
+-- Run "sudo app update" -- to update ubuntu versions etc
+-- Run "sudo app install nginx" -- to install nginx . Nginx gives an http server.
+-- Run "sudo systemctl start nginx" -- to start nginx
+-- Run "sudo systemctl enable nginx" -- to enable nginx
+-- Copy code from dist(build files) to http server (/var/www/html/) by doing
+"cd /var/www/html/"
+-- Run ls . Replace the index.nginx-debian.html file by dist folder
+-- Enter the frontend project by doing "cd devTinder-frontend"
+-- Run "sudo scp -r dist/\* /var/www/html/" -- sudo to get root level permisiions, scp is copy , and -r is recursiveness to copy everything of dist folder to /var/www/html/
+-- Run cd /var/www/html/ and ls -- all files have been copy pasted onto /var/www/html/
+-- Go to aws instances and find public iPv4 address -- where we can access our server
+-- Go to that ip , you should see your frontend app running. But it won't because aws blocks all our ports. Nginx HTTP Server is on port no- 80. We need to expose our port 80 to make this work. Enable port 80 on your instance by -
+-- Go to aws -> security -> security groups -> Inbound rules -> Edit inbound rules -> Add rule -> Port range (80) -> select 0.0.0.0/0 to allow access from anywhere on the internet -> Save rules
+-- Refresh the public iPv4 address and see frontend app running (only if the server is running)
+-- Deploy your backend
