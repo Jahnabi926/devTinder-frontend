@@ -119,15 +119,22 @@ Google or chat gpt -- "nginx proxy pass /api to 7777 node application"
 sudo nano /etc/nginx/sites-available/default
 
 -- Written in white are the rules and written with # are the comments. edit carefully
+
 -- Edit these --- server_name <public ip4 address> or server_name <domain name> . Example -- server_name 43.204.96.49 or server_name devTinder.com
 
 -- Below server_name 43.204.96.49 , Add the rule starting with "location /api/ {...} " given by google or chatgpt.
 Change http://127.0.0.1:7777/ to http://localhost:7777/ , since our api uses localhost.
 
+-- For handle routes like "devtinder.in/requests, on page refresh , it goes to 404 nginx error. To handle that , we change location / { ...try_files $uri 404" } to "try_files $uri /index.html". ---- for react and next js applications as they are single page applications
+
 -- Restart nginx by "sudo systemctl restart nginx"
+
 -- Now http://43.204.96.49/api should give "Cannot GET" instead of 404. Means it is mapped correctly.
+
 -- Go to http://43.204.96.49/api/feed , it says "Please login"
+
 -- Lastly go to your frontend project code , and change the hardcoded http://localhost:7777 "BASE_URL" inside constants file to "/api". If we don't write anything before /api means it will directly take our server ip address
+
 -- Login to the machine by doing ssh -i
 -- Import the code on the server
 -- Run "cd devTinder-frontend" and run "git-log" and "git pull" to see the changes
@@ -144,9 +151,12 @@ Change http://127.0.0.1:7777/ to http://localhost:7777/ , since our api uses loc
 -- DNS means Domain name server -- it tells Which ip address, devtinder.in is mapping to.
 -- Visit Cloudflare Sign up -- to manage DNS, it gives free SSL. It can be done in GoDaddy as well.
 -- Go to Add a domain name -> devtinder.in -> Quick scan for DNS Records -> free plan -> Continue to activation
+
 -- Visit GoDaddy -> Nameservers -> Change Nameservers -> I'll use my own nameservers -> use cloudflare nameservers -> copy-paste from cloudflare -> save. Wait for 15 mint to update.
+
 -- Under DNS Records - delete the A named records of devtinder.in. Keep one.
 -- Under one of the A records ,Copy our public ip4 address from aws and paste it under ip4 address. http not required. Only the ip4 address -> save
+
 -- devtinder.in will point to our server. Explore !
 
 ## Enable SSL - http to https
