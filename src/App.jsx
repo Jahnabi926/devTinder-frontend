@@ -5,6 +5,7 @@ import Profile from "./Components/Profile";
 import Feed from "./Components/Feed";
 import Connections from "./Components/Connections";
 import Requests from "./Components/Requests";
+import Premium from "./Components/Premium";
 
 const AppRouter = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const AppRouter = createBrowserRouter([
       { path: "profile", Component: Profile },
       { path: "connections", Component: Connections },
       { path: "requests", Component: Requests },
+      { path: "premium", Component: Premium },
     ],
   },
 ]);
