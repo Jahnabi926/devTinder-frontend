@@ -6,6 +6,7 @@ import Feed from "./Components/Feed";
 import Connections from "./Components/Connections";
 import Requests from "./Components/Requests";
 import Premium from "./Components/Premium";
+import Chat from "./Components/Chat";
 
 const AppRouter = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const AppRouter = createBrowserRouter([
       { path: "connections", Component: Connections },
       { path: "requests", Component: Requests },
       { path: "premium", Component: Premium },
+      { path: "chat/:targetUserId", Component: Chat },
     ],
   },
 ]);
