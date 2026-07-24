@@ -11,6 +11,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null);
+  const socketRef = useRef(null);
   const userId = user?._id;
 
   const fetchChatMessages = async () => {
@@ -18,7 +19,6 @@ const Chat = () => {
       const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
         withCredentials: true,
       });
-      console.log(chat.data.messages);
 
       const chatMessages = chat?.data?.messages.map((msg) => {
         const { senderId, text } = msg;
@@ -39,7 +39,7 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    messagesEndRef?.current?.scrollIntoView({ behaviour: "smooth" });
+    messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   useEffect(() => {
@@ -47,40 +47,29 @@ const Chat = () => {
       return;
     }
     const socket = createSocketConnection();
-    // As soon as the page loads, the socket connection is made and joinChat event is emitted.
-    // socket.emit — the method name itself, for sending an event -- Fixed (built into Socket.io, you cannot rename these)
+    socketRef.current = socket;
+
     socket.emit("joinChat", {
-      // Customised name joinChat
-      firstName: user.firstName,
-      userId,
       targetUserId,
     });
 
-    // socket.on("eventName", callback) is fixed — that's the Socket.io API
-    // socket.on — the method name itself, for listening to an event. Customised name messageReceived.
     socket.on("messageReceived", ({ firstName, lastName, text }) => {
-      console.log(firstName + " : " + text);
       setMessages((messages) => [...messages, { firstName, lastName, text }]);
     });
 
-    // clean up function whenever the chat component unmounts
     return () => {
       socket.disconnect();
     };
   }, [userId, targetUserId]);
 
   const sendMessage = () => {
-    const socket = createSocketConnection();
-    socket.emit("sendMessage", {
-      // Customised name sendMessage
-      firstName: user.firstName,
-      lastName: user.lastName,
-      userId,
+    socketRef.current.emit("sendMessage", {
       targetUserId,
       text: newMessage,
     });
     setNewMessage("");
   };
+
   return (
     <div className="flex flex-col mx-auto w-3/4 h-[70vh] m-5 border border-gray-600">
       <h1 className="p-5 border-b border-gray-600">Chat</h1>
