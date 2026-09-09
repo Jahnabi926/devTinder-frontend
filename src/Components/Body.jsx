@@ -21,7 +21,7 @@ const Body = () => {
       }); // Otherwise the cookie won't be sent and you'll get 401s even when logged in.
       dispatch(addUser(res.data));
     } catch (err) {
-      if (err.status === 401) {
+      if (err.response?.status === 401) {
         navigate("/login");
       }
     }

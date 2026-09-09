@@ -31,7 +31,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       if (err.response) {
-        // server responded with an oror (e.g. wrong credentials)
+        // server responded with an error (e.g. wrong credentials)
         setError(err.response.data || "Invalid email or password.");
       } else if (err.request) {
         // request sent, no response came back
@@ -53,7 +53,7 @@ const Login = () => {
       navigate("/profile");
     } catch (err) {
       if (err.response) {
-        // server responded with an oror (e.g. wrong credentials)
+        // server responded with an erroro (e.g. wrong credentials)
         setError(err.response.data || "Sign up failed.");
       } else if (err.request) {
         // request sent, no response came back
@@ -65,7 +65,7 @@ const Login = () => {
   };
   return (
     <div className="flex justify-center my-10 min-h-screen md:min-h-0">
-      <ErrorToast error={error} />
+      <ErrorToast key={error} error={error} />
       <div className="card bg-base-300 w-96 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         <div className="card-body">
           <h2 className="card-title justify-center">

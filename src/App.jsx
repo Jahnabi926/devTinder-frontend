@@ -13,6 +13,7 @@ const AppRouter = createBrowserRouter([
     path: "/",
     Component: Body,
     children: [
+      // children are what get swapped into that <Outlet />, based on the URL.
       { index: true, Component: Feed },
       { path: "login", Component: Login },
       { path: "profile", Component: Profile },
